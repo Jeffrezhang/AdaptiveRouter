@@ -1,0 +1,20 @@
+@"
+# Raw datasets (excluded — see README)
+*.csv
+
+# Base model weights — public, download from Hugging Face (see README)
+finetune-selfcognition/qwen2.5-7b-base/
+
+# Fine-tuned adapters ARE tracked via Git LFS (see .gitattributes)
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local env
+.env
+config.local.yaml
+"@ | Out-File -FilePath .gitignore -Encoding utf8
+qwen3-embedding-routing-finetuned/model.safetensors

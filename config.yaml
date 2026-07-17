@@ -1,0 +1,31 @@
+model_list:
+  - model_name: small-model
+    litellm_params:
+      model: openai/qwenrouterai
+      api_base: http://localhost:8001/v1
+      api_key: "none"
+      input_cost_per_token: 0.0000001
+    model_info:
+      adaptive_router_preferences:
+        quality_tier: 2
+        strengths: ["factual_lookup", "general", "writing", "code_understanding"]
+  - model_name: large-model
+    litellm_params:
+      model: ollama/qwen3:8b
+      api_base: http://localhost:11434
+      input_cost_per_token: 0.000001
+    model_info:
+      adaptive_router_preferences:
+        quality_tier: 3
+        strengths: ["code_generation", "analytical_reasoning", "technical_design"]
+  - model_name: qwen-semantic-router
+    litellm_params:
+      model: auto_router/adaptive_router
+      adaptive_router_config:
+        available_models: ["small-model", "large-model"]
+        weights:
+          quality: 0.85
+          cost: 0.15
+
+litellm_settings:
+  database_url: "postgresql://litellm:litellm@localhost:5432/routing"

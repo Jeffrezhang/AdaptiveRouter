@@ -1,0 +1,96 @@
+﻿
+Loading: router_results.csv
+
+==============================================================
+  ROUTER COST ANALYSIS WITH ERROR ACCOUNTING
+==============================================================
+
+  Queries in benchmark: 3,696
+  Avg input tokens:     90
+  Avg output tokens:    180
+
+  Pricing:
+    Qwen3-8B  input/output  $0.20/1M tokens
+    MiniCPM5  input/output  $0.10/1M tokens
+
+--------------------------------------------------------------
+  ROUTING ACCURACY
+--------------------------------------------------------------
+  Overall accuracy:  82.4%
+  Precision:         31.0%
+  Recall:            57.6%
+  F1 score:          40.3%
+  Errors (timeouts): 40
+
+--------------------------------------------------------------
+  ROUTING SPLIT
+--------------------------------------------------------------
+  Ground truth small: 3,316  (89.7%)
+  Ground truth large:   380  (10.3%)
+  Actually routed small: 2,989  (80.9%)
+  Actually routed large:   707  (19.1%)
+
+--------------------------------------------------------------
+  CONFUSION MATRIX
+--------------------------------------------------------------
+  True  Large (TP):   219  -- correctly sent to large
+  False Large (FP):   488  -- should have been small (wasted money)
+  True  Small (TN): 2,828  -- correctly sent to small
+  False Small (FN):   161  -- should have been large (quality loss)
+
+--------------------------------------------------------------
+  COST COMPARISON  (scaled to 999,999 queries)
+--------------------------------------------------------------
+  All Large (baseline):           $   54.0000
+  Perfect Router (no errors):     $   38.8760
+  Actual Router (with errors):    $   41.2648
+  Routing overhead (both):        $    9.1000
+
+--------------------------------------------------------------
+  ERROR COST IMPACT
+--------------------------------------------------------------
+  FP penalty (overpaid for large): $    3.5649
+  FN queries (sent to small):        161  (quality risk, no extra cost)
+  FN worst case (re-run on large): $    2.3523
+  Gap (perfect vs actual router):  $    2.3888
+
+--------------------------------------------------------------
+  SAVINGS vs ALL-LARGE BASELINE
+--------------------------------------------------------------
+  Perfect router savings: $   15.1240  (28.0%)
+  Actual router savings:  $   12.7352  (23.6%)
+  Accuracy cost:          $    2.3888  (lost due to errors)
+
+--------------------------------------------------------------
+  SAVINGS AT DIFFERENT SCALES
+--------------------------------------------------------------
+         1,000 queries  ->  perfect $0.02  |  actual $0.01
+        10,000 queries  ->  perfect $0.15  |  actual $0.13
+       100,000 queries  ->  perfect $1.51  |  actual $1.27
+     1,000,000 queries  ->  perfect $15.12  |  actual $12.74
+    10,000,000 queries  ->  perfect $151.24  |  actual $127.35
+
+--------------------------------------------------------------
+  BREAKDOWN BY CATEGORY
+--------------------------------------------------------------
+  Category         Total   Acc%    TP    FP    TN    FN      Saves  Saves%
+..............................................................
+  Open QA          2,257  84.5%    29   320  1879    29 $ 13.9383   42.3%
+  Generation         497  87.1%     6    44   427    20 $  3.2654   45.0%
+  Coding             298  63.8%   173    17    17    91 $  0.7890   18.1%
+  Brainstorm         197  86.3%     5    12   165    15 $  1.3149   45.7%
+  Chat               188  93.6%     0    12   176     0 $  1.2857   46.8%
+  Extract             68  70.6%     0    20    48     0 $  0.3506   35.3%
+  Closed QA           61  42.6%     6    30    20     5 $  0.1826   20.5%
+  Summarize           60  73.3%     0    16    44     0 $  0.3214   36.7%
+  Rewrite             56  76.8%     0    13    43     0 $  0.3141   38.4%
+  Classify            14  64.3%     0     4     9     1 $  0.0731   35.7%
+
+==============================================================
+  BOTTOM LINE:
+  Perfect router saves 28.0% vs all-large
+  Actual router saves  23.6% vs all-large
+  Routing errors cost  4.4% in lost savings
+  At 1M queries: perfect $15.12 | actual $12.74
+==============================================================
+

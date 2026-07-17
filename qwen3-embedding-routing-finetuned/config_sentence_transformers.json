@@ -1,0 +1,14 @@
+{
+  "__version__": {
+    "pytorch": "2.11.0+cu128",
+    "sentence_transformers": "5.5.1",
+    "transformers": "5.10.2"
+  },
+  "default_prompt_name": null,
+  "model_type": "SentenceTransformer",
+  "prompts": {
+    "document": "",
+    "query": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery:"
+  },
+  "similarity_fn_name": "cosine"
+}

@@ -1,0 +1,69 @@
+﻿
+Loading: C:\Users\jeffr\Downloads\litellm-litellm_internal_staging\litellm-litellm_internal_staging\litellm\router_strategy\adaptive_router\smart-router-relabeled.csv
+
+==============================================================
+  EMBEDDING ROUTER - COST SAVINGS REPORT
+==============================================================
+
+  Dataset:           3,696 queries
+  Scale target:      1,000,000 queries
+  Avg input tokens:  90
+  Avg output tokens: 180
+
+  Pricing:
+    Qwen3-8B   input  $0.20/1M tokens
+    Qwen3-8B   output $0.20/1M tokens
+    MiniCPM5   input  $0.10/1M tokens
+    MiniCPM5   output $0.10/1M tokens
+
+--------------------------------------------------------------
+  ROUTING SPLIT
+--------------------------------------------------------------
+  -> MiniCPM5  (small): 3,316 queries  (89.7%)
+  -> Qwen3-8B  (large):   380 queries  (10.3%)
+
+--------------------------------------------------------------
+  COST COMPARISON  (scaled to 1,000,000 queries)
+--------------------------------------------------------------
+  All Large (no router):         $   54.0000
+  All Small (max savings):        $   27.0000
+  Router (excl. overhead):        $   29.7760
+  Router overhead (probe calls):  $    9.1000
+  Router (incl. overhead):        $   38.8760
+
+--------------------------------------------------------------
+  SAVINGS
+--------------------------------------------------------------
+  Gross savings (no overhead):    $   24.2240  (44.9%)
+  Net savings   (incl overhead):  $   15.1240  (28.0%)
+
+--------------------------------------------------------------
+  SAVINGS AT DIFFERENT SCALES
+--------------------------------------------------------------
+         1,000 queries  ->  saves $0.02
+        10,000 queries  ->  saves $0.15
+       100,000 queries  ->  saves $1.51
+     1,000,000 queries  ->  saves $15.12
+    10,000,000 queries  ->  saves $151.24
+
+--------------------------------------------------------------
+  BREAKDOWN BY CATEGORY
+--------------------------------------------------------------
+  Category         Total  ->Small  ->Large  Small%      Saves  Saves%
+..............................................................
+  Open QA          2,257    2,199       58     97% $ 16.0641   48.7%
+  Generation         497      471       26     95% $  3.4407   47.4%
+  Coding             298       34      264     11% $  0.2484    5.7%
+  Brainstorm         197      177       20     90% $  1.2930   44.9%
+  Chat               188      188        0    100% $  1.3734   50.0%
+  Extract             68       68        0    100% $  0.4968   50.0%
+  Closed QA           61       50       11     82% $  0.3653   41.0%
+  Summarize           60       60        0    100% $  0.4383   50.0%
+  Rewrite             56       56        0    100% $  0.4091   50.0%
+  Classify            14       13        1     93% $  0.0950   46.4%
+
+==============================================================
+  BOTTOM LINE: Using the router saves 28.0% vs all-large.
+  At 1M queries that's $15.12 saved.
+==============================================================
+
