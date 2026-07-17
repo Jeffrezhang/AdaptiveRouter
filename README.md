@@ -122,7 +122,7 @@ pip install -r requirements.txt --break-system-packages
 **Terminal 1 — Ollama** (large model backend):
 ```bash
 ollama serve
-ollama pull qwen3:8b   # or whichever large model you configure
+ollama pull qwen3:8b   # or whichever large model you configure, just make sure the change the config.yaml model pointer as well
 ```
 
 **Terminal 2 — FastAPI small-model server**:
