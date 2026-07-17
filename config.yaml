@@ -28,4 +28,4 @@ model_list:
           cost: 0.15
 
 litellm_settings:
-  database_url: "postgresql://litellm:litellm@localhost:5432/routing"
+  database_url: os.environ/DATABASE_URL
